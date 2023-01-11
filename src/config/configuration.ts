@@ -1,0 +1,15 @@
+export default () => ({
+  URL: process.env.URL || 'http://localhost',
+  PORT: parseInt(process.env.PORT, 10) || 3000,
+  GLOBAL_PREFIX: process.env.GLOBAL_PREFIX || 'api',
+  PATH_SWAGGER: process.env.PATH_SWAGGER || 'docu',
+  VERSION: process.env.VERSION || '1',
+  VALIDATE_TOKEN: process.env.VALIDATE_TOKEN === 'true',
+  ENVIRONMENT: process.env.ENVIRONMENT,
+  FIREBASE_CREDENTIAL: process.env.FIREBASE_CREDENTIAL,
+  FIREBASE_CONFIG: process.env.FIREBASE_CONFIG,
+  JWT_SECRET: process.env.JWT_SECRET,
+  JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '15m',
+  URL_FRONT: process.env.URL_FRONT,
+  URL_REDIRECT_PAYMENT: process.env.URL_REDIRECT_PAYMENT,
+});

@@ -16,6 +16,80 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@config": [
+        "src/config"
+      ],
+      "@config/*": [
+        "src/config/*"
+      ],
+      "@cross": [
+        "src/cross"
+      ],
+      "@cross/*": [
+        "src/cross/*"
+      ],
+      "@modules": [
+        "src/modules"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+      "@shared": [
+        "src/shared/index"
+      ],
+      "@shared/*": [
+        "src/shared/*"
+      ],
+      "@decorators": [
+        "src/shared/decorators/index"
+      ],
+      "@decorators/*": [
+        "src/shared/decorators/*"
+      ],
+      "@dto": [
+        "src/shared/dto/index"
+      ],
+      "@dto/*": [
+        "src/shared/dto/*"
+      ],
+      "@interfaces": [
+        "src/shared/interfaces/index"
+      ],
+      "@interfaces/*": [
+        "src/shared/interfaces/*"
+      ],
+      "@repositories": [
+        "src/shared/repositories/index"
+      ],
+      "@repositories/*": [
+        "src/shared/repositories/*"
+      ],
+      "@schemas": [
+        "src/shared/schemas/index"
+      ],
+      "@schemas/*": [
+        "src/shared/schemas/*"
+      ],
+      "@services": [
+        "src/shared/services/index"
+      ],
+      "@services/*": [
+        "src/shared/services/*"
+      ],
+      "@utils": [
+        "src/shared/utils/index"
+      ],
+      "@utils/*": [
+        "src/shared/utils/*"
+      ],
+      "@src": [
+        "src"
+      ],
+      "@src/*": [
+        "src/*"
+      ]
+    }
   }
 }
