@@ -11,50 +11,52 @@ datasource db {
 }
 
 model Users {
-  id          Int @id @default(autoincrement())
-  name        String
-  clave       String
-  createdAt   DateTime @default(now())
-  roles       Roles? @relation(fields: [roles_id], references: [id])
-  roles_id    Int?
-  business    Business[]
+  id            Int @id @default(autoincrement())
+  name          String
+  createdAt     DateTime @default(now())
+  roles         Roles? @relation(fields: [roles_id], references: [id])
+  roles_id      Int?
+  business      Business[]
+  UID           String
 }
 
 model Roles {
-  id          Int @id @default(autoincrement())
-  description String
-  users       Users[]
+  id            Int @id @default(autoincrement())
+  description   String
+  users         Users[]
 }
 
 model Business {
-  id          Int @id @default(autoincrement())
-  name        String
-  rut         String @unique
-  users       Users? @relation(fields: [users_id], references: [id])
-  users_id    Int?
-  clients     Clients[]
+  id            Int @id @default(autoincrement())
+  name          String
+  business_name String
+  rut           String @unique
+  users         Users? @relation(fields: [users_id], references: [id])
+  users_id      Int?
+  clients       Clients[]
+  address       String
 }
 
 model Clients {
-  id          Int @id @default(autoincrement())
-  name        String
-  rut         String @unique
-  address     String
-  business    Business? @relation(fields: [business_id], references: [id])
-  business_id Int?
-  quotes      Quotes[]
+  id            Int @id @default(autoincrement())
+  name          String
+  rut           String @unique
+  address       String
+  business      Business? @relation(fields: [business_id], references: [id])
+  business_id   Int?
+  quotes        Quotes[]
 }
 
 model Quotes {
-  id          Int @id @default(autoincrement())
-  title       String
-  detail      String
-  dateQuote   String
-  clients     Clients? @relation(fields: [clients_id], references: [id])
-  clients_id  Int? @unique
-  ItemsQuotes ItemsQuotes[]
-  file        File? @relation(fields: [file_id], references: [id])
-  file_id     Int? @unique
+  id            Int @id @default(autoincrement())
+  title         String
+  detail        String
+  dateQuote     String
+  clients       Clients? @relation(fields: [clients_id], references: [id])
+  clients_id    Int? @unique
+  ItemsQuotes   ItemsQuotes[]
+  file          File? @relation(fields: [file_id], references: [id])
+  file_id       Int? @unique
 }
 
 model ItemsQuotes {
@@ -85,7 +87,7 @@ model File {
 }
 
 model TypeFile {
-  id    Int @id @default(autoincrement())
-  name  String
-  file  File[]
+  id            Int @id @default(autoincrement())
+  name          String
+  file          File[]
 }
