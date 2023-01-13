@@ -7,6 +7,8 @@ import { ConfigService } from '@nestjs/config';
 import { BusinessController } from '@modules/private/business/business.controller';
 import { BusinessUseCases } from '@modules/private/business/business.use-cases';
 import { PrismaModule } from '@src/prisma/prisma.module';
+import { ProdServController } from './prodServ/prodServ.controller';
+import { ProdServUseCases } from './prodServ/prodServ.use-cases';
 
 @Module({
   imports: [
@@ -26,8 +28,8 @@ import { PrismaModule } from '@src/prisma/prisma.module';
       },
     }),
   ],
-  controllers: [BusinessController],
-  providers: [BusinessUseCases, JwtAuthService],
+  controllers: [BusinessController, ProdServController],
+  providers: [BusinessUseCases, ProdServUseCases, JwtAuthService],
   exports: [],
 })
 export class PrivateModule {}

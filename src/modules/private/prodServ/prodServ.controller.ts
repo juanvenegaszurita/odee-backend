@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@cross';
 import {
   Body,
   Controller,
@@ -10,8 +11,8 @@ import {
 import { ProdServDto } from '@shared/dto/prodServ.dto';
 import { ProdServUseCases } from './prodServ.use-cases';
 
-@Controller()
-export class ProvServController {
+@Controller('ProdServ')
+export class ProdServController {
   constructor(private prodServUseCases: ProdServUseCases) {}
 
   @Get()
@@ -24,17 +25,21 @@ export class ProvServController {
   }
 
   @Post()
-  async createProdServ(@Body() body: ProdServDto) {
+  async createProdServ(@Body(new ValidationPipe()) body: ProdServDto) {
     return await this.prodServUseCases.createData(body);
   }
 
   @Put('/:id')
-  async updateProdServ(@Param('id') id : number, @Body() body: ProdServDto) {
-    return await this.prodServUseCases.updateData(id, body);
+  async updateProdServ(
+    @Param('id') id: string,
+    @Body(new ValidationPipe()) body: ProdServDto,
+  ) {
+    delete body['id'];
+    return await this.prodServUseCases.updateData(parseInt(id), body);
   }
 
   @Delete('/:id')
-  async deleteProdServ(@Param('id') id : number) {
-    return await this.prodServUseCases.deleteData(id)
+  async deleteProdServ(@Param('id') id: number) {
+    return await this.prodServUseCases.deleteData(id);
   }
 }

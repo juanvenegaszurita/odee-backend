@@ -5,7 +5,7 @@ import {
   FIREBASE_ADMIN_INJECT,
   FirebaseAdminSDK,
 } from '@tfarras/nestjs-firebase-admin';
-import { BACKOFFICE } from '@decorators';
+import { PRIVATE_ODEE } from '@decorators';
 
 @Injectable()
 export class FirebaseAuthGuard extends AuthGuard('firebase') {
@@ -20,17 +20,17 @@ export class FirebaseAuthGuard extends AuthGuard('firebase') {
     await super.canActivate(context);
     const request = context.switchToHttp().getRequest();
 
-    const roles = this.reflector.getAll<boolean[]>(BACKOFFICE, [
+    const roles = this.reflector.getAll<boolean[]>(PRIVATE_ODEE, [
       context.getHandler(),
       context.getClass(),
     ]);
-    const isBackofficeRole = roles.some((e) => !!e);
-    if (isBackofficeRole) {
+    const isProvateOdeeRole = roles.some((e) => !!e);
+    if (isProvateOdeeRole) {
       const decodeToken = await this.firebaseAdmin
         .auth()
         .verifyIdToken(request.headers.authorization.split(' ')[1]);
 
-      return decodeToken?.roles === BACKOFFICE;
+      return decodeToken?.roles === PRIVATE_ODEE;
     }
 
     return true;
