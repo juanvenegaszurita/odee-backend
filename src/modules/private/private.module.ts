@@ -9,6 +9,8 @@ import { BusinessUseCases } from '@modules/private/business/business.use-cases';
 import { PrismaModule } from '@src/prisma/prisma.module';
 import { ProdServController } from './prodServ/prodServ.controller';
 import { ProdServUseCases } from './prodServ/prodServ.use-cases';
+import { TypeFileController } from './typeFile/typeFile.controller';
+import { TypeFileUseCases } from './typeFile/typeFile.use-cases';
 
 @Module({
   imports: [
@@ -28,8 +30,13 @@ import { ProdServUseCases } from './prodServ/prodServ.use-cases';
       },
     }),
   ],
-  controllers: [BusinessController, ProdServController],
-  providers: [BusinessUseCases, ProdServUseCases, JwtAuthService],
+  controllers: [BusinessController, ProdServController, TypeFileController],
+  providers: [
+    BusinessUseCases,
+    ProdServUseCases,
+    TypeFileUseCases,
+    JwtAuthService,
+  ],
   exports: [],
 })
 export class PrivateModule {}

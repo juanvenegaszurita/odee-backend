@@ -20,8 +20,8 @@ export class ProdServController {
     return await this.prodServUseCases.findAll();
   }
   @Get()
-  async prodServUnique(@Param('id') id: number) {
-    return await this.prodServUseCases.findUnique(id);
+  async prodServUnique(@Param('id') id: string) {
+    return await this.prodServUseCases.findUnique(parseInt(id));
   }
 
   @Post()
@@ -39,7 +39,7 @@ export class ProdServController {
   }
 
   @Delete('/:id')
-  async deleteProdServ(@Param('id') id: number) {
-    return await this.prodServUseCases.deleteData(id);
+  async deleteProdServ(@Param('id') id: string) {
+    return await this.prodServUseCases.deleteData(parseInt(id));
   }
 }
