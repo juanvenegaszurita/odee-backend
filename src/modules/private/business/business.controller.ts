@@ -10,12 +10,12 @@ import {
 import { BusinessDto } from 'src/shared/dto/business.dto';
 import { BusinessUseCases } from './business.use-cases';
 
-@Controller()
+@Controller("bussiness")
 export class BusinessController {
   constructor(private businessUseCases: BusinessUseCases) {}
 
-  @Get()
-  async business() {
+  @Get('/:id')
+  async business(@Param('id') id : number) {
     return await this.businessUseCases.findAll();
   }
   @Get()

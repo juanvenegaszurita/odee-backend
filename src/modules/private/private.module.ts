@@ -4,8 +4,13 @@ import { JwtModule as JwtM } from '@nestjs/jwt';
 import { ConfigurationsInterface, JwtAuthService } from '@shared';
 import { ConfigService } from '@nestjs/config';
 
+import { BusinessController } from '@modules/private/business/business.controller';
+import { BusinessUseCases } from '@modules/private/business/business.use-cases';
+import { PrismaModule } from '@src/prisma/prisma.module';
+
 @Module({
   imports: [
+    PrismaModule,
     JwtM.registerAsync({
       inject: [ConfigService],
       useFactory: async (config: ConfigService<ConfigurationsInterface>) => {
@@ -21,8 +26,8 @@ import { ConfigService } from '@nestjs/config';
       },
     }),
   ],
-  controllers: [],
-  providers: [JwtAuthService],
+  controllers: [BusinessController],
+  providers: [BusinessUseCases, JwtAuthService],
   exports: [],
 })
 export class PrivateModule {}

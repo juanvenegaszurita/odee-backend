@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@nestjs/axios": "^1.0.1",
+    "@nestjs/class-validator": "^0.13.4",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
@@ -28,6 +29,7 @@
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.1.4",
+    "@prisma/client": "^4.8.1",
     "@tfarras/nestjs-firebase-admin": "^2.0.1",
     "@tfarras/nestjs-firebase-auth": "^2.0.0",
     "@types/cache-manager": "^4.0.2",
@@ -37,8 +39,10 @@
     "class-validator": "^0.14.0",
     "firebase": "^9.15.0",
     "log4js": "^6.7.1",
+    "npm": "^9.3.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
+    "prisma": "^4.8.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },

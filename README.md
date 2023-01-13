@@ -71,3 +71,19 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+
+# -----------------------------------------
+
+
+Comando sube cambios a la  ase de datos : 
+```bash
+npx prisma migrate dev --name init
+```
+
+Comando actualiza node module con la nueva schema prisma
+
+```bash
+npx prisma generate
+```
