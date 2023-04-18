@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@cross';
 import {
   Body,
   Controller,
@@ -10,7 +11,7 @@ import {
 import { RoleDto } from '@shared/dto/role.dto';
 import { RolesUseCases } from './role.use-cases';
 
-@Controller()
+@Controller('Role')
 export class RoleController {
   constructor(private roleUseCases: RolesUseCases) {}
 
@@ -24,17 +25,21 @@ export class RoleController {
   }
 
   @Post()
-  async createRole(@Body() body: RoleDto) {
+  async createRole(@Body(new ValidationPipe()) body: RoleDto) {
     return await this.roleUseCases.createData(body);
   }
 
   @Put('/:id')
-  async updateRole(@Param('id') id : number, @Body() body: RoleDto) {
-    return await this.roleUseCases.updateData(id, body);
+  async updateRole(
+    @Param('id') id: string,
+    @Body(new ValidationPipe()) body: RoleDto,
+  ) {
+    delete body['id'];
+    return await this.roleUseCases.updateData(parseInt(id), body);
   }
 
   @Delete('/:id')
-  async deleteRole(@Param('id') id : number) {
-    return await this.roleUseCases.deleteData(id)
+  async deleteRole(@Param('id') id: string) {
+    return await this.roleUseCases.deleteData(parseInt(id));
   }
 }

@@ -1,28 +1,28 @@
 import { IsString, IsInt } from '@nestjs/class-validator';
-import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty } from '@nestjs/swagger';
 
-export class QuoteDto {
+export class QuotationDto {
   @ApiProperty()
   @IsInt()
-  id?          :number
+  id?: number;
 
   @ApiProperty()
   @IsString()
-  title?       :string
+  title?: string;
 
   @ApiProperty()
   @IsString()
-  detail?      :string
+  detail?: string;
 
   @ApiProperty()
   @IsString()
-  dateQuote?   :string
+  dateQuotation?: string;
 
   @ApiProperty()
   @IsInt()
-  clients_id?  :number
+  clients_id?: number;
 
   @ApiProperty()
   @IsInt()
-  file_id?     :number
+  file_id?: number;
 }

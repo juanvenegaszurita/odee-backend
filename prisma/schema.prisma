@@ -17,6 +17,7 @@ model Users {
   roles         Roles? @relation(fields: [roles_id], references: [id])
   roles_id      Int?
   business      Business[]
+  email         String
   UID           String
 }
 
@@ -44,51 +45,51 @@ model Clients {
   address       String
   business      Business? @relation(fields: [business_id], references: [id])
   business_id   Int?
-  quotes        Quotes[]
+  quotation     Quotation[]
 }
 
-model Quotes {
+model Quotation {
   id            Int @id @default(autoincrement())
   title         String
   detail        String
   dateQuote     String
   clients       Clients? @relation(fields: [clients_id], references: [id])
   clients_id    Int? @unique
-  ItemsQuotes   ItemsQuotes[]
+  ItemsQuotation   ItemsQuotation[]
   file          File? @relation(fields: [file_id], references: [id])
   file_id       Int? @unique
 }
 
-model ItemsQuotes {
+model ItemsQuotation {
   id            Int @id @default(autoincrement())
   cant          Int
   total         Int
-  quotes        Quotes? @relation(fields: [quotes_id], references: [id])
-  quotes_id     Int? @unique
+  quotation     Quotation? @relation(fields: [quotation_id], references: [id])
+  quotation_id  Int? @unique
   prodServ      ProdServ? @relation(fields: [prodServ_id], references: [id])
   prodServ_id   Int? @unique
 }
 
 model ProdServ {
-  id            Int @id @default(autoincrement())
-  detail        String
-  price         Int
-  type          String
-  itemsQuotes   ItemsQuotes[]
+  id              Int @id @default(autoincrement())
+  detail          String
+  price           Int
+  type            String
+  itemsQuotation  ItemsQuotation[]
 }
 
 model File {
   id            Int @id @default(autoincrement())
   url           String
-  mimeType      String
   typeFile      TypeFile? @relation(fields: [typeFile_id], references: [id])
   typeFile_id   Int?
-  quotes        Quotes[]
+  quotation     Quotation[]
 }
 
 model TypeFile {
   id            Int @id @default(autoincrement())
   name          String
   mime          String
+  extension     String
   file          File[]
 }

@@ -10,7 +10,7 @@ import {
 import { ClientDto } from '@shared/dto/client.dto';
 import { ClientUseCases } from './client.use-cases';
 
-@Controller()
+@Controller('Clients')
 export class ClientController {
   constructor(private clientUseCases: ClientUseCases) {}
 
@@ -18,9 +18,9 @@ export class ClientController {
   async client() {
     return await this.clientUseCases.findAll();
   }
-  @Get()
-  async clientUnique(@Param('id') id: number) {
-    return await this.clientUseCases.findUnique(id);
+  @Get('/:id')
+  async clientUnique(@Param('id') id: string) {
+    return await this.clientUseCases.findUnique(parseInt(id));
   }
 
   @Post()
@@ -29,12 +29,14 @@ export class ClientController {
   }
 
   @Put('/:id')
-  async updateClient(@Param('id') id : number, @Body() body: ClientDto) {
-    return await this.clientUseCases.updateData(id, body);
+  async updateClient(@Param('id') id: string, @Body() body: ClientDto) {
+    delete body['id'];
+    body['business_id'] = parseInt(`${body['business_id']}`);
+    return await this.clientUseCases.updateData(parseInt(id), body);
   }
 
   @Delete('/:id')
-  async deleteClient(@Param('id') id : number) {
-    return await this.clientUseCases.deleteData(id)
+  async deleteClient(@Param('id') id: string) {
+    return await this.clientUseCases.deleteData(parseInt(id));
   }
 }

@@ -1,38 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Quote } from 'src/shared/interfaces/quote.interface';
+import { Quotation } from 'src/shared/interfaces/quotation.interface';
 
 @Injectable()
-export class QuoteUseCases {
+export class QuotationUseCases {
   constructor(private dbService: PrismaService) {}
 
-  async findAll(): Promise<Quote[]> {
-    return await this.dbService.quotes.findMany({
+  async findAll(): Promise<Quotation[]> {
+    return await this.dbService.quotation.findMany({
       include: {
-        ItemsQuotes: {},
+        ItemsQuotation: {},
       },
     });
   }
 
-  async findUnique(id: number): Promise<Quote[]> {
-    return await this.dbService.quotes.findMany({
+  async findUnique(id: number): Promise<Quotation[]> {
+    return await this.dbService.quotation.findMany({
       where: {
         id: id,
       },
       include: {
-        ItemsQuotes: {},
+        ItemsQuotation: {},
       },
     });
   }
 
   async createData(data: any) {
-    return await this.dbService.quotes.create({
+    return await this.dbService.quotation.create({
       data,
     });
   }
 
   async updateData(id: number, data: any) {
-    return await this.dbService.quotes.update({
+    return await this.dbService.quotation.update({
       where: {
         id: id,
       },
@@ -41,7 +41,7 @@ export class QuoteUseCases {
   }
 
   async deleteData(id: number) {
-    return await this.dbService.quotes.delete({
+    return await this.dbService.quotation.delete({
       where: {
         id: id,
       },

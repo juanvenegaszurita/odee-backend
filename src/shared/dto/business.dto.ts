@@ -3,10 +3,6 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class BusinessDto {
   @ApiProperty()
-  @IsInt()
-  id?: number;
-
-  @ApiProperty()
   @IsString()
   name?: string;
 

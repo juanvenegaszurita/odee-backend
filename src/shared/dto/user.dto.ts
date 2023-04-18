@@ -1,24 +1,16 @@
 import { IsString, IsInt, IsDate } from '@nestjs/class-validator';
-import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty } from '@nestjs/swagger';
 
 export class UserDto {
   @ApiProperty()
-  @IsInt()
-  id?          :number
+  @IsString()
+  name?: string;
 
   @ApiProperty()
   @IsString()
-  name?        :string
-
-  @ApiProperty()
-  @IsString()
-  clave?       :string
-
-  @ApiProperty()
-  @IsDate()
-  createdAt?   :Date
+  email?: string;
 
   @ApiProperty()
   @IsInt()
-  roles_id?    :number
+  roles_id?: number;
 }

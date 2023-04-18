@@ -7,10 +7,18 @@ import { ConfigService } from '@nestjs/config';
 import { BusinessController } from '@modules/private/business/business.controller';
 import { BusinessUseCases } from '@modules/private/business/business.use-cases';
 import { PrismaModule } from '@src/prisma/prisma.module';
+import { ClientController } from './client/client.controller';
+import { ClientUseCases } from './client/client.use-cases';
+import { FileController } from './file/file.controller';
+import { FileUseCases } from './file/file.use-cases';
 import { ProdServController } from './prodServ/prodServ.controller';
 import { ProdServUseCases } from './prodServ/prodServ.use-cases';
+import { RoleController } from './role/role.controller';
+import { RolesUseCases } from './role/role.use-cases';
 import { TypeFileController } from './typeFile/typeFile.controller';
 import { TypeFileUseCases } from './typeFile/typeFile.use-cases';
+import { UserController } from './user/user.controller';
+import { UserUseCases } from './user/user.use-cases';
 
 @Module({
   imports: [
@@ -30,11 +38,23 @@ import { TypeFileUseCases } from './typeFile/typeFile.use-cases';
       },
     }),
   ],
-  controllers: [BusinessController, ProdServController, TypeFileController],
+  controllers: [
+    BusinessController,
+    ClientController,
+    FileController,
+    ProdServController,
+    RoleController,
+    TypeFileController,
+    UserController,
+  ],
   providers: [
     BusinessUseCases,
+    ClientUseCases,
     ProdServUseCases,
+    RolesUseCases,
     TypeFileUseCases,
+    UserUseCases,
+    FileUseCases,
     JwtAuthService,
   ],
   exports: [],

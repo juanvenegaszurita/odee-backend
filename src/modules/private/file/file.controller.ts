@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@cross';
 import {
   Body,
   Controller,
@@ -10,7 +11,7 @@ import {
 import { FileDto } from '@shared/dto/file.dto';
 import { FileUseCases } from './file.use-cases';
 
-@Controller()
+@Controller('File')
 export class FileController {
   constructor(private fileUseCases: FileUseCases) {}
 
@@ -18,23 +19,28 @@ export class FileController {
   async file() {
     return await this.fileUseCases.findAll();
   }
-  @Get()
-  async fileUnique(@Param('id') id: number) {
-    return await this.fileUseCases.findUnique(id);
+  @Get('/:id')
+  async fileUnique(@Param('id') id: string) {
+    return await this.fileUseCases.findUnique(parseInt(id));
   }
 
   @Post()
-  async createFile(@Body() body: FileDto) {
+  async createFile(@Body(new ValidationPipe()) body: FileDto) {
     return await this.fileUseCases.createData(body);
   }
 
   @Put('/:id')
-  async updateFile(@Param('id') id : number, @Body() body: FileDto) {
-    return await this.fileUseCases.updateData(id, body);
+  async updateFile(
+    @Param('id') id: string,
+    @Body(new ValidationPipe()) body: FileDto,
+  ) {
+    delete body['id'];
+    body['typeFile_id'] = parseInt(`${body['typeFile_id']}`);
+    return await this.fileUseCases.updateData(parseInt(id), body);
   }
 
   @Delete('/:id')
-  async deleteFile(@Param('id') id : number) {
-    return await this.fileUseCases.deleteData(id)
+  async deleteFile(@Param('id') id: string) {
+    return await this.fileUseCases.deleteData(parseInt(id));
   }
 }

@@ -1,4 +1,4 @@
 export interface TypeFile {
-  id?    :number
-  name?  :string
+  id?: number;
+  name?: string;
 }

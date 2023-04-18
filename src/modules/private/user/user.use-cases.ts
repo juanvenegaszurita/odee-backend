@@ -1,43 +1,60 @@
+import { ResponseClass } from '@cross';
 import { Injectable } from '@nestjs/common';
+import { ResponseInterface } from '@shared';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Role } from 'src/shared/interfaces/role.interface';
 
 @Injectable()
-export class UserUseCases {
-  constructor(private dbService: PrismaService) {}
-
-  async findAll(): Promise<Role[]> {
-    return await this.dbService.users.findMany();
+export class UserUseCases extends ResponseClass {
+  constructor(private dbService: PrismaService) {
+    super();
   }
 
-  async findUnique(id: number): Promise<Role[]> {
-    return await this.dbService.users.findMany({
+  async findAll(): Promise<ResponseInterface<Role[]>> {
+    const data = await this.dbService.users.findMany({
+      include: {
+        roles: {},
+      },
+    });
+    return this.success(data, { message: 'Ok' });
+  }
+
+  async findUnique(id: number): Promise<ResponseInterface<Role[]>> {
+    const data = await this.dbService.users.findMany({
       where: {
         id: id,
       },
+      include: {
+        roles: {},
+      },
     });
+    return this.success(data, { message: 'Ok' });
   }
 
   async createData(data: any) {
-    return await this.dbService.users.create({
+    data.UID = 'ascacasc';
+    const returnData = await this.dbService.users.create({
       data,
     });
+    return this.success(returnData, { message: 'Ok' });
   }
 
   async updateData(id: number, data: any) {
-    return await this.dbService.users.update({
+    const returnData = await this.dbService.users.update({
       where: {
         id: id,
       },
       data,
     });
+    return this.success(returnData, { message: 'Ok' });
   }
 
   async deleteData(id: number) {
-    return await this.dbService.users.delete({
+    const returnData = await this.dbService.users.delete({
       where: {
         id: id,
       },
     });
+    return this.success(returnData, { message: 'Ok' });
   }
 }

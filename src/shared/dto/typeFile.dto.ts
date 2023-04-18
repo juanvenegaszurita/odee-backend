@@ -9,4 +9,8 @@ export class TypeFileDto {
   @ApiProperty()
   @IsString()
   mime?: string;
+
+  @ApiProperty()
+  @IsString()
+  extension?: string;
 }
